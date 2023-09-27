@@ -1,0 +1,20 @@
+# Use the lightweight node image like alpine
+FROM node:alpine
+
+# Set the working directory for the backend
+WORKDIR /app/backend
+
+# Copy package.json and package-lock.json to the container
+COPY ./package*.json ./
+
+# Install backend dependencies
+RUN npm install
+
+# Copy the rest of the backend source code to the container
+COPY ./ .
+
+# Expose the port on which your Express.js server will run
+EXPOSE 5000
+
+# Start the Express.js server
+CMD ["npm", "start"]
